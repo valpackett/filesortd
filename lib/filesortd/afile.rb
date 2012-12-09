@@ -4,6 +4,10 @@ require "fileutils"
 module Filesortd
   class Afile < Struct.new(:path)
 
+    def contents
+      File.read path
+    end
+
     def rm
       File.unlink path
     end
