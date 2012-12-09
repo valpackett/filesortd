@@ -11,6 +11,11 @@ module Filesortd
     alias :delete :rm
     alias :unlink :rm
 
+    def cp(target)
+      FileUtils.cp path, target
+    end
+    alias :copy :cp
+
     def mv(target)
       FileUtils.mv path, target
     end

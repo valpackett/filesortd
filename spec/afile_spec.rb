@@ -4,6 +4,16 @@ include Filesortd
 describe Afile do
   let(:path) { "/tmp/filesortdtest" }
 
+  it "copies" do
+    path2 = "/tmp/filesortdtest2"
+    File.write path, "1"
+    Afile.new(path).cp path2
+    File.exists?(path).should be_true
+    File.exists?(path2).should be_true
+    File.unlink path
+    File.unlink path2
+  end
+
   it "moves" do
     path2 = "/tmp/filesortdtest2"
     File.write path, "1"
