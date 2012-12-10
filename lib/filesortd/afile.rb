@@ -2,33 +2,41 @@ require "popen4"
 require "fileutils"
 
 module Filesortd
-  class Afile < Struct.new(:path)
+  class Afile
+    attr_reader :path
+
+    def initialize(path)
+      @path = path
+    end
 
     def contents
-      File.read path
+      File.read @path
     end
 
     def rm
-      File.unlink path
+      File.unlink @path
+      @path = nil
     end
     alias :remove :rm
     alias :delete :rm
     alias :unlink :rm
 
     def cp(target)
-      FileUtils.cp path, target
+      FileUtils.cp @path, target
+      @path = target
     end
     alias :copy :cp
 
     def mv(target)
-      FileUtils.mv path, target
+      FileUtils.mv @path, target
+      @path = target
     end
     alias :move :mv
 
     def pipe(cmd)
       out = nil
       POpen4::popen4(cmd) do |stdout, stderr, stdin, pid|
-        stdin.puts File.read(path)
+        stdin.puts File.read(@path)
         stdin.close
         out = stdout.read.strip
       end
@@ -37,7 +45,7 @@ module Filesortd
 
     def pass(cmd)
       out = nil
-      POpen4::popen4("#{cmd} #{path.shellescape}") do |stdout, stderr, stdin, pid|
+      POpen4::popen4("#{cmd} #{@path.shellescape}") do |stdout, stderr, stdin, pid|
         stdin.close
         out = stdout.read.strip
       end
@@ -60,7 +68,7 @@ module Filesortd
       else
         idx = lbl
       end
-      system %{osascript -e 'tell app "Finder" to set label index of (POSIX file "#{path}" as alias) to #{idx}'}
+      system %{osascript -e 'tell app "Finder" to set label index of (POSIX file "#{@path}" as alias) to #{idx}'}
     end
   end
 end
