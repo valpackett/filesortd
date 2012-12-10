@@ -12,6 +12,7 @@ module Filesortd
     def contents
       File.read @path
     end
+    alias :read :contents
 
     def rm
       File.unlink @path
