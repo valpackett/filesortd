@@ -46,4 +46,13 @@ describe Afile do
     Afile.new(path).pass("cat").should == "123"
     File.unlink path
   end
+
+  it "labels" do
+    if RbConfig::CONFIG['target_os'] =~ /darwin(1.+)?$/i
+      File.write path, "123"
+      Afile.new(path).label(:red)
+      `osascript -e 'tell app "Finder" to get label index of (POSIX file "#{path}" as alias)'`.should == "2\n"
+      File.unlink path
+    end
+  end
 end
