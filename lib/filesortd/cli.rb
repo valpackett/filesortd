@@ -2,7 +2,7 @@ require "thor"
 require "filesortd"
 
 module Filesortd
-  class Script
+  class Script < Struct.new(:listeners)
     include Filesortd
   end
 
@@ -12,7 +12,15 @@ module Filesortd
     desc 'start FILENAME', 'Start filesortd'
     def start(filename)
       puts 'Started filesortd'
-      Script.new.instance_eval File.read(filename)
+      begin
+        scpt = Script.new
+        scpt.instance_eval File.read(filename)
+        loop {}
+      rescue Interrupt
+        scpt.listeners.each do |l|
+          l.stop
+        end
+      end
     end
 
     desc 'version', 'Show the Guard version'
