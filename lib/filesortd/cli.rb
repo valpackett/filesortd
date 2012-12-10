@@ -2,8 +2,12 @@ require "thor"
 require "filesortd"
 
 module Filesortd
-  class Script < Struct.new(:listeners)
+  class Script
     include Filesortd
+    attr_accessor :listeners
+    def initialize
+      @listeners = []
+    end
   end
 
   class CLI < Thor
