@@ -24,6 +24,7 @@ module Filesortd
         scpt.listeners.each do |l|
           l.stop
         end
+        puts 'Stopped filesortd'
       end
     end
 
