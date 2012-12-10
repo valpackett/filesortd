@@ -1,29 +1,31 @@
 # Filesortd
 
-TODO: Write a gem description
+A Ruby DSL for automatically sorting your files based on rules.
+Like [Hazel](http://www.noodlesoft.com/hazel.php), but cross-platform, no GUI required.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'filesortd'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install filesortd
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ filesortd start yourconfig.rb
 
-## Contributing
+yourconfig.rb:
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+```ruby
+folder "/Users/myfreeweb/Downloads" do
+  match "*.mp3" do
+    mv "/Users/myfreeweb/Music"
+    on :osx do
+      label :orange
+    end
+  end
+end
+
+folder "/Users/myfreeweb/Pictures" do
+  match "*.png" do
+    pass "optipng" # pass -- execute a command with the path as an argument
+  end
+end
+```
