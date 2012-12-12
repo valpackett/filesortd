@@ -3,7 +3,7 @@ require "docile"
 require "filesortd/callback"
 
 module Filesortd
-  def folder(*paths, &block)
+  def folders(*paths, &block)
     callback = Docile.dsl_eval(Callback.new, &block)
     cb = Proc.new do |modified, added, removed|
       puts "Processing files: #{added}"
@@ -13,4 +13,5 @@ module Filesortd
     l.start(false)
     @listeners << l
   end
+  alias :folder :folders
 end

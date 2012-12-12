@@ -35,10 +35,9 @@ folder "/Users/myfreeweb/Downloads" do
   end
 end
 
-folder "/Users/myfreeweb/Pictures" do
+folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
   match "*.png" do
     pass "optipng"
-    # pass -- execute a command with the path as an argument
   end
 end
 ```
