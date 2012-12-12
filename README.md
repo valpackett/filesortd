@@ -18,7 +18,10 @@ If you're on OS X, also install osx-plist for things like `downloaded_from` (i.e
 yourconfig.rb:
 
 ```ruby
+# DSL usage example
+
 folder "/Users/myfreeweb/Downloads" do
+
   # Do things to files that match a glob or a regex
   match "*.mp3" do
     mv "/Users/myfreeweb/Music"
@@ -35,9 +38,19 @@ folder "/Users/myfreeweb/Downloads" do
   end
 end
 
+
+# You can watch multiple folders at once
+
 folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
+
+  # Do things to any files
+  any do
+    label :blue
+  end
+
   match "*.png" do
     pass "optipng"
+    label :green
   end
 end
 ```

@@ -10,6 +10,10 @@ module Filesortd
       @matchers = {}
     end
 
+    def any(&callback)
+      @matchers[AlwaysTrueMatcher.new] = callback
+    end
+
     def match(pattern, &callback)
       @matchers[Matcher.new(pattern)] = callback
     end

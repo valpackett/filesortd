@@ -31,4 +31,10 @@ module Filesortd
       @matcher.call(pl, path)
     end
   end
+
+  class AlwaysTrueMatcher
+    def match(s)
+      true
+    end
+  end
 end
