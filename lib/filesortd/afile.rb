@@ -69,7 +69,7 @@ module Filesortd
       else
         idx = lbl
       end
-      system %{osascript -e 'tell app "Finder" to set label index of (POSIX file "#{@path}" as alias) to #{idx}'}
+      system %{osascript -e 'tell app "Finder" to set label index of (POSIX file "#{@path}" as alias) to #{idx}' 2&>/dev/null}
     end
   end
 end
