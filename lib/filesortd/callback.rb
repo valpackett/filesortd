@@ -15,7 +15,7 @@ module Filesortd
     end
 
     def match(pattern, &callback)
-      @matchers[Matcher.new(pattern)] = callback
+      @matchers[BasenameMatcher.new(pattern)] = callback
     end
 
     def downloaded_from(pattern, &callback)
