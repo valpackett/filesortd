@@ -1,6 +1,6 @@
 module Filesortd
-  class Matcher
-    def self.match(pattern, path)
+  class Matcher < Struct.new(:pattern)
+    def match(path)
       filename = File.basename(path)
       if pattern.is_a? Regexp
         !pattern.match(filename).nil? # return a boolean through "not nil"
