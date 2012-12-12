@@ -27,7 +27,7 @@ folder "/Users/myfreeweb/Downloads" do
     mv "/Users/myfreeweb/Music"
 
     # Do things if running on a particular OS
-    on :osx do
+    os :osx do
       label :orange
     end
   end
