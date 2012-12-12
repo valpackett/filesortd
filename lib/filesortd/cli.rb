@@ -19,7 +19,8 @@ module Filesortd
       begin
         scpt = Script.new
         scpt.instance_eval File.read(filename)
-        loop {}
+        loop { sleep 0.1 }
+        # sleep to prevent 100% cpu load
       rescue Interrupt
         scpt.listeners.each do |l|
           l.stop

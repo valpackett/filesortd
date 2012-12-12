@@ -7,6 +7,10 @@ Like [Hazel](http://www.noodlesoft.com/hazel.php), but cross-platform, no GUI re
 
     $ gem install filesortd
 
+If you're on OS X, also install osx-plist for things like `downloaded_from` (i.e. xattr support) to work:
+
+    $ gem install osx-plist
+
 ## Usage
 
     $ filesortd start yourconfig.rb
@@ -23,6 +27,11 @@ folder "/Users/myfreeweb/Downloads" do
     on :osx do
       label :orange
     end
+  end
+
+  # Mac OS X saves the location you downloaded a file from
+  downloaded_from %r{destroyallsoftware} do
+    mv "/Users/myfreeweb/Movies/DAS"
   end
 end
 

@@ -14,6 +14,14 @@ module Filesortd
       @matchers[Matcher.new(pattern)] = callback
     end
 
+    def downloaded_from(pattern, &callback)
+      pm = Matcher.new(pattern)
+      m = XattrMatcher.new("com.apple.metadata:kMDItemWhereFroms") do |elements, path|
+        elements.map { |el| pm.match(el) }.count(true) >= 1
+      end
+      @matchers[m] = callback
+    end
+
     def call(paths)
       paths.each do |path|
         @matchers.each do |matcher, callback|

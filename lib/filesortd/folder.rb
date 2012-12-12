@@ -9,7 +9,7 @@ module Filesortd
       puts "Processing files: #{added}"
       callback.call added
     end
-    l = Listen.to(*paths).latency(0.1).change(&cb)
+    l = Listen.to(*paths).latency(0.5).change(&cb)
     l.start(false)
     @listeners << l
   end
