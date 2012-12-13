@@ -42,8 +42,8 @@ describe Afile do
   end
 
   it "pipes" do
-    File.write path, "1+2"
-    Afile.new(path).pipe("bc").should == "3"
+    File.write path, "123"
+    Afile.new(path).pipe("cat").should == "123"
     File.unlink path
   end
 
