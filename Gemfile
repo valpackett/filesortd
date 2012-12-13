@@ -13,6 +13,7 @@ if RbConfig::CONFIG['target_os'] =~ /darwin(1.+)?$/i
 end
 
 group :development, :test do
+  gem 'rake'
   gem 'rspec'
   gem 'fuubar'
 end
