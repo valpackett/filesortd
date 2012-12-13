@@ -1,4 +1,4 @@
-# Filesortd
+# Filesortd [![Build Status](https://travis-ci.org/myfreeweb/filesortd.png?branch=master)](https://travis-ci.org/myfreeweb/filesortd)
 
 A Ruby DSL for automatically sorting your files based on rules.
 Like [Hazel](http://www.noodlesoft.com/hazel.php), but cross-platform, no GUI required.
