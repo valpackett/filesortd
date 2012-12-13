@@ -1,6 +1,6 @@
 require "popen4"
 require "fileutils"
-require "Shellwords"
+require "shellwords"
 
 module Filesortd
   class Afile
