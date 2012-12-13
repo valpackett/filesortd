@@ -1,4 +1,4 @@
-require "Shellwords"
+require "shellwords"
 
 module Filesortd
   class Matcher < Struct.new(:pattern)
