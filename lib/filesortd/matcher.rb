@@ -1,3 +1,5 @@
+require "Shellwords"
+
 module Filesortd
   class Matcher < Struct.new(:pattern)
     def match(s)
@@ -19,7 +21,6 @@ module Filesortd
   class XattrMatcher
     def initialize(xattr, &matcher)
       require "osx/plist"
-      require "Shellwords"
       @xattr = xattr
       @matcher = matcher
     end
@@ -29,6 +30,18 @@ module Filesortd
       str = [`xattr -px #{@xattr.shellescape} #{path.shellescape}`.gsub("\n", "").gsub(" ", "")].pack("H*")
       pl = OSX::PropertyList.load(str)
       @matcher.call(pl, path)
+    end
+  end
+
+  class SpotlightMatcher
+    def initialize(key, value)
+      @key = key
+      @matcher = Matcher.new(value)
+    end
+
+    def match(path)
+      val = `mdls -raw -name #{@key} #{path.shellescape}`
+      @matcher.match(val)
     end
   end
 

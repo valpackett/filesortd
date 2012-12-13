@@ -18,6 +18,10 @@ module Filesortd
       @matchers[BasenameMatcher.new(pattern)] = callback
     end
 
+    def kind(pattern, &callback)
+      @matchers[SpotlightMatcher.new("kMDItemKind", pattern)] = callback
+    end
+
     def downloaded_from(pattern, &callback)
       pm = Matcher.new(pattern)
       m = XattrMatcher.new("com.apple.metadata:kMDItemWhereFroms") do |elements, path|

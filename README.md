@@ -39,6 +39,11 @@ folder "/Users/myfreeweb/Downloads" do
     # or
     open_in "MPlayerX"
   end
+
+  # Match on the kind, also OS X only
+  kind "Ruby Source" do
+    label :red
+  end
 end
 
 
