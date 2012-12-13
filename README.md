@@ -35,6 +35,9 @@ folder "/Users/myfreeweb/Downloads" do
   # Mac OS X saves the location you downloaded a file from
   downloaded_from %r{destroyallsoftware} do
     mv "/Users/myfreeweb/Movies/DAS"
+    open_in :default
+    # or
+    open_in "MPlayerX"
   end
 end
 
@@ -64,3 +67,4 @@ Actions:
 - `pipe(cmd)` -- start the command, pass the file to stdin, get the stdout
 - `pass(cmd)` -- start the command, pass the path to the file as an argument, get the stdout
 - `label(color)` -- set the OS X Finder label (:none, :orange, :red, :yellow, :blue, :purple, :green, :gray or :grey)
+- `open_in(app)` -- open the file using the OS X `open` command, use :default for the default app for the file type

@@ -1,5 +1,6 @@
 require "popen4"
 require "fileutils"
+require "Shellwords"
 
 module Filesortd
   class Afile
@@ -51,6 +52,14 @@ module Filesortd
         out = stdout.read.strip
       end
       out
+    end
+
+    def open_in(app)
+      if app == :default
+        pass "open"
+      else
+        pass "open -a #{app.shellescape}"
+      end
     end
 
     def label(lbl)
