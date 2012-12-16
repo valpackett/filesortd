@@ -3,6 +3,7 @@ require "filesortd/afile"
 require "docile"
 
 module Filesortd
+  # Folder DSL (add matchers)
   class Callback
     attr_accessor :matchers
 
