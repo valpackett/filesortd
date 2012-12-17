@@ -5,6 +5,20 @@ require "docile"
 module Filesortd
   # Folder DSL (add matchers)
   class Callback
+    # For some reason, label indices are opposite when setting/getting via
+    # AppleScript vs mdls
+    FINDER_LABELS = {
+      :none => 0,
+      :orange => 7,
+      :red => 6,
+      :yellow => 5,
+      :blue => 4,
+      :purple => 3,
+      :green => 2,
+      :gray => 1,
+      :grey => 1
+    }
+
     attr_accessor :matcher_sets
 
     def initialize
@@ -12,12 +26,15 @@ module Filesortd
     end
 
     def match(options={}, &callback)
-      matchers = options.map { |matchr, params| matcher(matchr.to_sym, params) }
-      @matcher_sets[matchers] = callback
+      @matcher_sets[matcher(options)] = callback
     end
 
-    def any(&callback)
-      match :any => nil, &callback
+    def any(*matchers, &callback)
+      match :any => matchers, &callback
+    end
+
+    def all(*matchers, &callback)
+      match :all => matchers, &callback
     end
 
     def pattern(pattern, &callback)
@@ -44,10 +61,7 @@ module Filesortd
     def call(paths)
       paths.each do |path|
         @matcher_sets.each do |matchers, callback|
-          # If matcher is an array already, it won't be changed
-          # And if it's a single matcher, it'll be wrapped into an array
-          matchers = [matchers].flatten
-          Docile.dsl_eval(Afile.new(path), &callback) if matchers.all? { |m| m.match(path) }
+          Docile.dsl_eval(Afile.new(path), &callback) if matchers.match(path)
         end
       end
     end
@@ -55,6 +69,16 @@ module Filesortd
     private
     def matcher(type, pattern=nil)
       case type
+      when Hash
+        AndMatcher.new type.map { |matchr, params| matcher(matchr.to_sym, params) }
+      when Array
+        AndMatcher.new type
+      when Matcher
+        type
+      when :all, :any
+        klass = type == :all ? AndMatcher : OrMatcher
+        matchers = pattern.map { |m| matcher(m) }
+        klass.new matchers
       when :any
         AlwaysTrueMatcher.new
       when :pattern
@@ -65,7 +89,7 @@ module Filesortd
         SpotlightMatcher.new "kMDItemKind", pattern
       when :label
         if pattern.is_a? Symbol
-          idx = Afile::FINDER_LABELS[pattern]
+          idx = FINDER_LABELS[pattern]
         else
           idx = pattern
         end

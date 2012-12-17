@@ -53,6 +53,10 @@ folder "/Users/myfreeweb/Downloads" do
   match pattern: '*.mp4', downloaded_from: %r{destroyallsoftware} do
     label :gray
   end
+
+  # Match files either labelled gray or blue
+  any({ label: :gray }, { label: :blue }) do
+  end
 end
 
 
@@ -74,7 +78,8 @@ end
 
 ### Matchers
 
-- `any` -- any file
+- `any(matcher1,matcher2)` -- any file that passes either matcher1 or matcher2. If no matcher is specified, it's true
+- `all(matcher1,matcher2)` -- any file that passes both matcher1 and matcher2
 - `pattern(pat)` -- files that conform to `pat`
 - `ext(extn)` (or `extension`) -- files that have an extension of `extn`
 - `kind(knd)` -- files that have Spotlight kind of `knd`

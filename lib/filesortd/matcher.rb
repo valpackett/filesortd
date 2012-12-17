@@ -19,7 +19,7 @@ module Filesortd
     end
   end
 
-  class XattrMatcher
+  class XattrMatcher < Matcher
     def initialize(xattr, &matcher)
       require "osx/plist"
       @xattr = xattr
@@ -34,10 +34,10 @@ module Filesortd
     end
   end
 
-  class SpotlightMatcher
+  class SpotlightMatcher < Matcher
     def initialize(key, value)
       @key = key
-      @matcher = Matcher.new(value)
+      @matcher = Matcher.new(value.to_s)
     end
 
     def match(path)
@@ -46,9 +46,31 @@ module Filesortd
     end
   end
 
-  class AlwaysTrueMatcher
+  class AlwaysTrueMatcher < Matcher
     def match(s)
       true
+    end
+  end
+
+  class AndMatcher < Matcher
+    attr_reader :matchers
+    def initialize(matchers)
+      @matchers = matchers
+    end
+
+    def match(path)
+      @matchers.all? { |m| m.match(path) }
+    end
+  end
+
+  class OrMatcher < Matcher
+    attr_reader :matchers
+    def initialize(matchers)
+      @matchers = matchers.empty? ? [AlwaysTrueMatcher.new] : matchers
+    end
+
+    def match(path)
+      @matchers.any? { |m| m.match(path) }
     end
   end
 end
