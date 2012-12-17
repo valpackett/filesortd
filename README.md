@@ -45,6 +45,11 @@ folder "/Users/myfreeweb/Downloads" do
     label :red
   end
 
+  # Match on Finder label, OS X
+  label :green do
+    mv "/Users/myfreeweb/Documents"
+  end
+
   # Match all mp4 files downloaded from DAS
   match pattern: '*.mp4', downloaded_from: %r{destroyallsoftware} do
     label :gray
