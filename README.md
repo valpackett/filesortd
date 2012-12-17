@@ -67,7 +67,7 @@ folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
     label :blue
   end
 
-  pattern "*.png" do
+  ext :png do
     pass "optipng"
     label :green
   end
