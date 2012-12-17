@@ -16,5 +16,5 @@ group :development, :test do
   gem 'rake'
   gem 'rspec'
   gem 'fuubar'
-  gem 'cane'
+  gem 'cane' unless RUBY_VERSION =~ /1.8/
 end
