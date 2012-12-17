@@ -3,12 +3,16 @@ require "docile"
 require "filesortd/callback"
 
 module Filesortd
-  def folders(*paths, &block)
-    paths.select! do |path|
+  def select_existing(paths)
+    paths.select do |path|
       e = File.exists? path
       puts "Folder does not exist: #{path}" unless e
       e
     end
+  end
+
+  def folders(*paths, &block)
+    paths = select_existing paths
     callback = Docile.dsl_eval(Callback.new, &block)
     cb = Proc.new do |modified, added, removed|
       puts "Processing files: #{added}"

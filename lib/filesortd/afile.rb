@@ -3,6 +3,7 @@ require "fileutils"
 require "shellwords"
 
 module Filesortd
+  # File actions DSL
   class Afile
     FINDER_LABELS = {
       :none => 0,

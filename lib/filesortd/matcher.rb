@@ -1,6 +1,7 @@
 require "shellwords"
 
 module Filesortd
+  # Basic matcher
   class Matcher < Struct.new(:pattern)
     def match(s)
       if pattern.is_a? Regexp
