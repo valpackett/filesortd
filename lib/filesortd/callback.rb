@@ -62,9 +62,7 @@ module Filesortd
         else
           idx = lbl
         end
-
         SpotlightMatcher.new "kMDItemFSLabel", idx
-
       when :downloaded_from
         pm = Matcher.new(pattern)
         m = XattrMatcher.new("com.apple.metadata:kMDItemWhereFroms") do |elements, path|
