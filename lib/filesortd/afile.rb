@@ -36,6 +36,18 @@ module Filesortd
     alias :delete :rm
     alias :unlink :rm
 
+    def trash
+      os :osx do
+        applescript 'tell app "Finder" to delete theFile'
+      end
+      os :linux do
+        pass "trash-put"
+      end
+      os :freebsd do
+        pass "trash-put"
+      end
+    end
+
     def cp(target)
       FileUtils.cp @path, target
       @path = target
