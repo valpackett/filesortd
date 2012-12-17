@@ -50,7 +50,7 @@ if RbConfig::CONFIG['target_os'] =~ /darwin(1.+)?$/i
   describe SpotlightMatcher do
     it "matches spotlight attributes" do
       path = "/tmp/spotlighttest.rb"
-      File.write path, "puts 'hello'"
+      File.write path, "#!/usr/bin/env ruby"
       SpotlightMatcher.new("kMDItemKind", "Ruby Source").match(path).should be_true
       SpotlightMatcher.new("kMDItemKind", "Perl Source").match(path).should be_false
     end
