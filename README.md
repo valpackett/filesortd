@@ -19,7 +19,6 @@ yourconfig.rb:
 
 ```ruby
 # DSL usage example
-
 folder "/Users/myfreeweb/Downloads" do
 
   # Do things to files that match a glob or a regex
@@ -58,9 +57,7 @@ end
 
 
 # You can watch multiple folders at once
-
 folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
-
   # Do things to any files
   any do
     applescript 'tell app "Finder" to reveal theFile'
@@ -75,7 +72,33 @@ folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
 end
 ```
 
-Actions:
+### Matchers
+
+- `any` -- any file
+- `pattern(pat)` -- files that conform to `pat`
+- `ext(extn)` (or `extension`) -- files that have an extension of `extn`
+- `kind(knd)` -- files that have Spotlight kind of `knd`
+- `label(lbl)` -- files that have Finder label of `lbl`
+- `downloaded_from(url)` -- files that were downloaded from url
+  `url`/url matching `url`
+
+Matchers can be called either by themselves
+
+```ruby
+label :gray do
+  kind 'Ruby Source' do
+  end
+end
+```
+
+or grouped into a single statement (preferred)
+
+```ruby
+match label: :gray, kind: 'Ruby Source' do
+end
+```
+
+### Actions
 
 - `contents` (or `read`) -- get the contents
 - `rm` (or `remove`, `delete`, `unlink`) -- remove
@@ -92,3 +115,7 @@ Actions:
 
 - [myfreeweb](https://github.com/myfreeweb)
 - [goshakkk](https://github.com/goshakkk)
+
+## License
+
+MIT.
