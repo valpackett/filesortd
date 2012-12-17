@@ -23,7 +23,7 @@ yourconfig.rb:
 folder "/Users/myfreeweb/Downloads" do
 
   # Do things to files that match a glob or a regex
-  match "*.mp3" do
+  pattern "*.mp3" do
     mv "/Users/myfreeweb/Music"
 
     # Do things if running on a particular OS
@@ -46,7 +46,7 @@ folder "/Users/myfreeweb/Downloads" do
   end
 
   # Match all mp4 files downloaded from DAS
-  match '*.mp4', downloaded_from: %r{destroyallsoftware} do
+  match pattern: '*.mp4', downloaded_from: %r{destroyallsoftware} do
     label :gray
   end
 end
@@ -61,7 +61,7 @@ folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
     label :blue
   end
 
-  match "*.png" do
+  pattern "*.png" do
     pass "optipng"
     label :green
   end

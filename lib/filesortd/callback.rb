@@ -17,19 +17,19 @@ module Filesortd
     end
 
     def any(&callback)
-      match(:any, &callback)
+      match any: nil, &callback
     end
 
     def pattern(pattern, &callback)
-      match(:basename, &callback)
+      match pattern: pattern, &callback
     end
 
     def kind(pattern, &callback)
-      match(:kind, &callback)
+      match kind: pattern, &callback
     end
 
     def downloaded_from(pattern, &callback)
-      match(:downloaded_from, &callback)
+      match downloaded_from: pattern, &callback
     end
 
     def call(paths)
@@ -48,7 +48,7 @@ module Filesortd
       case type
       when :any
         AlwaysTrueMatcher.new
-      when :basename
+      when :pattern
         BasenameMatcher.new pattern
       when :kind
         SpotlightMatcher.new "kMDItemKind", pattern
