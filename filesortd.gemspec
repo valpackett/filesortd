@@ -6,7 +6,7 @@ require 'filesortd/version'
 Gem::Specification.new do |gem|
   gem.name          = "filesortd"
   gem.version       = Filesortd::VERSION
-  gem.authors       = ["myfreeweb"]
+  gem.authors       = ["myfreeweb", "goshakkk"]
   gem.email         = ["floatboth@me.com"]
   gem.description   = %q{Automatic rule-based sorting for your files. Like Hazel, but doesn't need a GUI.}
   gem.summary       = %q{Rule-based file sorting}
