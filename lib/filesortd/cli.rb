@@ -31,7 +31,7 @@ module Filesortd
       end
     end
 
-    desc 'version', 'Show the Guard version'
+    desc 'version', 'Show the Filesortd version'
     map %w(-v --version) => :version
     def version
       puts ::Filesortd::VERSION
