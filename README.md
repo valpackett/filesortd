@@ -53,6 +53,7 @@ folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
 
   # Do things to any files
   any do
+    applescript 'tell app "Finder" to reveal theFile'
     label :blue
   end
 
@@ -73,3 +74,4 @@ Actions:
 - `pass(cmd)` -- start the command, pass the path to the file as an argument, get the stdout
 - `label(color)` -- set the OS X Finder label (:none, :orange, :red, :yellow, :blue, :purple, :green, :gray or :grey)
 - `open_in(app)` -- open the file using the OS X `open` command, use :default for the default app for the file type
+- `applescript(script)` -- run provided AppleScript. Use `theFile` inside it to refer to the file matched
