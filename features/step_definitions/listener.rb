@@ -1,5 +1,6 @@
 require "rspec/expectations"
 require "filesortd"
+require "filesortd/oneeight"
 include Filesortd
 
 Before do
