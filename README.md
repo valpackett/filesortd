@@ -78,6 +78,7 @@ Actions:
 
 - `contents` (or `read`) -- get the contents
 - `rm` (or `remove`, `delete`, `unlink`) -- remove
+- `trash` -- put to trash (OS X/Linux, Linux requires [trash-cli](https://github.com/andreafrancia/trash-cli))
 - `cp` (or `copy`) -- copy
 - `mv` (or `move`) -- move/rename
 - `pipe(cmd)` -- start the command, pass the file to stdin, get the stdout

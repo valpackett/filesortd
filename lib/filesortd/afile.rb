@@ -37,14 +37,11 @@ module Filesortd
     alias :unlink :rm
 
     def trash
-      os :osx do
-        applescript 'tell app "Finder" to delete theFile'
-      end
-      os :linux do
-        pass "trash-put"
-      end
-      os :freebsd do
-        pass "trash-put"
+      case RbConfig::CONFIG['target_os']
+      when /darwin(1.+)?$/i then applescript 'tell app "Finder" to delete theFile'
+      when /freebsd/i then pass "trash-put"
+      when /linux/i then pass "trash-put"
+      when /mswin|mingw/i then puts "Trash not supported on Windows."
       end
     end
 
