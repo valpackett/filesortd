@@ -15,5 +15,6 @@ end
 group :development, :test do
   gem 'rake'
   gem 'rspec'
+  gem 'cucumber'
   gem 'fuubar'
 end
