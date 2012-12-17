@@ -57,10 +57,10 @@ module Filesortd
       when :kind
         SpotlightMatcher.new "kMDItemKind", pattern
       when :label
-        if lbl.is_a? Symbol
-          idx = Afile::FINDER_LABELS[lbl]
+        if pattern.is_a? Symbol
+          idx = Afile::FINDER_LABELS[pattern]
         else
-          idx = lbl
+          idx = pattern
         end
         SpotlightMatcher.new "kMDItemFSLabel", idx
       when :downloaded_from
