@@ -12,7 +12,7 @@ module Filesortd
   end
 
   def folders(*paths, &block)
-    paths = select_existing paths
+    paths = select_existing paths.map { |path| File.expand_path path }
     unless paths == []
       callback = Docile.dsl_eval(Callback.new, &block)
       cb = Proc.new do |modified, added, removed|
