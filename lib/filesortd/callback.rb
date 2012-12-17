@@ -17,23 +17,23 @@ module Filesortd
     end
 
     def any(&callback)
-      match any: nil, &callback
+      match :any => nil, &callback
     end
 
     def pattern(pattern, &callback)
-      match pattern: pattern, &callback
+      match :pattern => pattern, &callback
     end
 
     def kind(pattern, &callback)
-      match kind: pattern, &callback
+      match :kind => pattern, &callback
     end
 
     def label(lbl, &callback)
-      match label: lbl, &callback
+      match :label => lbl, &callback
     end
 
     def downloaded_from(pattern, &callback)
-      match downloaded_from: pattern, &callback
+      match :downloaded_from => pattern, &callback
     end
 
     def call(paths)
