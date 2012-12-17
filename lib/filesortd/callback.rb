@@ -42,7 +42,7 @@ module Filesortd
     def match(pattern, options = {}, &callback)
       case pattern
       when String
-        match options.merge(basename: pattern), &callback
+        match options.merge(:basename => pattern), &callback
       else
         options = pattern
         
