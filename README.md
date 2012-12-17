@@ -44,6 +44,11 @@ folder "/Users/myfreeweb/Downloads" do
   kind "Ruby Source" do
     label :red
   end
+
+  # Match all mp4 files downloaded from DAS
+  match '*.mp4', downloaded_from: %r{destroyallsoftware} do
+    label :gray
+  end
 end
 
 

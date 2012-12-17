@@ -16,4 +16,5 @@ group :development, :test do
   gem 'rake'
   gem 'rspec'
   gem 'fuubar'
+  gem 'cane'
 end

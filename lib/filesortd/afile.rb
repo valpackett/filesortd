@@ -3,6 +3,7 @@ require "fileutils"
 require "shellwords"
 
 module Filesortd
+  # File actions DSL
   class Afile
     attr_reader :path
 

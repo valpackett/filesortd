@@ -2,6 +2,7 @@ require "thor"
 require "filesortd"
 
 module Filesortd
+  # Evaluation context
   class Script
     include Filesortd
     attr_accessor :listeners
@@ -10,6 +11,7 @@ module Filesortd
     end
   end
 
+  # CLI
   class CLI < Thor
     default_task :start
 
