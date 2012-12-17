@@ -83,5 +83,12 @@ module Filesortd
       end
       system %{osascript -e 'tell app "Finder" to set label index of (POSIX file "#{@path}" as alias) to #{idx}' 2&>/dev/null}
     end
+
+    def applescript(script)
+      full_script = %{set theFile to POSIX file "#{@path}"\n} + script
+      cmd = %{osascript -e '#{full_script}'}
+
+      pass cmd
+    end
   end
 end
