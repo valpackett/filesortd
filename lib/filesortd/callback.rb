@@ -22,6 +22,16 @@ module Filesortd
       @matchers[SpotlightMatcher.new("kMDItemKind", pattern)] = callback
     end
 
+    def label(lbl, &callback)
+      if lbl.is_a? Symbol
+        idx = Afile::FINDER_LABELS[lbl]
+      else
+        idx = lbl
+      end
+
+      @matchers[SpotlightMatcher.new("kMDItemFSLabel", idx)] = callback
+    end
+
     def downloaded_from(pattern, &callback)
       pm = Matcher.new(pattern)
       m = XattrMatcher.new("com.apple.metadata:kMDItemWhereFroms") do |elements, path|
@@ -37,6 +47,5 @@ module Filesortd
         end
       end
     end
-
   end
 end

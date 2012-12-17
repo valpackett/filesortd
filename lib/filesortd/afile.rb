@@ -4,6 +4,18 @@ require "shellwords"
 
 module Filesortd
   class Afile
+    FINDER_LABELS = {
+      :none => 0,
+      :orange => 1,
+      :red => 2,
+      :yellow => 3,
+      :blue => 4,
+      :purple => 5,
+      :green => 6,
+      :gray => 7,
+      :grey => 7
+    }
+      
     attr_reader :path
 
     def initialize(path)
@@ -64,17 +76,7 @@ module Filesortd
 
     def label(lbl)
       if lbl.is_a? Symbol
-        idx = {
-          :none => 0,
-          :orange => 1,
-          :red => 2,
-          :yellow => 3,
-          :blue => 4,
-          :purple => 5,
-          :green => 6,
-          :gray => 7,
-          :grey => 7
-        }[lbl]
+        idx = FINDER_LABELS[lbl]
       else
         idx = lbl
       end
