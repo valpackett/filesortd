@@ -83,7 +83,9 @@ module Filesortd
 
     def applescript(script)
       full_script = %{set theFile to POSIX file "#{@path}"\n} + script
-      system %{osascript -e '#{full_script}'}
+      cmd = %{osascript -e '#{full_script}'}
+
+      pass cmd
     end
   end
 end

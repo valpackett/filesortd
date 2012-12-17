@@ -75,7 +75,7 @@ describe Afile do
   it "runs applescript" do
     if RbConfig::CONFIG['target_os'] =~ /darwin(1.+)?$/i
       File.write path, "123"
-      Afile.new(path).applescript('tell app "Finder" to reveal theFile').should be_true
+      Afile.new(path).applescript('get POSIX path of theFile').should == path
       File.unlink path
     end
   end
