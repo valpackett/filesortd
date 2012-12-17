@@ -24,6 +24,11 @@ module Filesortd
       match :pattern => pattern, &callback
     end
 
+    def extension(ext, &callback)
+      match :extension => ext, &callback
+    end
+    alias :ext :extension
+
     def kind(pattern, &callback)
       match :kind => pattern, &callback
     end
@@ -54,6 +59,8 @@ module Filesortd
         AlwaysTrueMatcher.new
       when :pattern
         BasenameMatcher.new pattern
+      when :extension, :ext
+        BasenameMatcher.new "*.#{pattern}"
       when :kind
         SpotlightMatcher.new "kMDItemKind", pattern
       when :label
