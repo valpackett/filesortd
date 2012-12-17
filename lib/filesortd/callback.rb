@@ -29,7 +29,7 @@ module Filesortd
     end
 
     def label(lbl, &callback)
-      match(:label, lbl)
+      match label: lbl, &callback
     end
 
     def downloaded_from(pattern, &callback)
