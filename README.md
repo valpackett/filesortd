@@ -67,6 +67,7 @@ folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
     label :blue
   end
 
+  # Match by extension -- same as pattern "*.png"
   ext :png do
     pass "optipng"
     label :green
@@ -86,3 +87,8 @@ Actions:
 - `label(color)` -- set the OS X Finder label (:none, :orange, :red, :yellow, :blue, :purple, :green, :gray or :grey)
 - `open_in(app)` -- open the file using the OS X `open` command, use :default for the default app for the file type
 - `applescript(script)` -- run provided AppleScript. Use `theFile` inside it to refer to the file matched
+
+## Contributors
+
+- [myfreeweb](https://github.com/myfreeweb)
+- [goshakkk](https://github.com/goshakkk)
