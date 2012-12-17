@@ -18,49 +18,56 @@ If you're on OS X, also install osx-plist for things like `downloaded_from` (i.e
 yourconfig.rb:
 
 ```ruby
-# DSL usage example
+### This works everywhere:
 folder "/Users/myfreeweb/Downloads" do
-
-  # Do things to files that match a glob or a regex
+  # Using a single matcher
   pattern "*.mp3" do
     mv "/Users/myfreeweb/Music"
 
     # Do things if running on a particular OS
-    os :osx do
-      label :orange
+    os :linux do
+      mv "/opt/music"
     end
+
+    # Note that actions like `mv` update the location, so you can use them multiple times
   end
 
-  # Mac OS X saves the location you downloaded a file from
-  downloaded_from %r{destroyallsoftware} do
-    mv "/Users/myfreeweb/Movies/DAS"
-    open_in :default
-    # or
-    open_in "MPlayerX"
-  end
-
-  # Match on the kind, also OS X only
-  kind "Ruby Source" do
-    label :red
-  end
-
-  # Match on Finder label, OS X
-  label :green do
-    mv "/Users/myfreeweb/Documents"
-  end
-
-  # Match all mp4 files downloaded from DAS
-  match pattern: '*.mp4', downloaded_from: %r{destroyallsoftware} do
-    label :gray
+  # Using multiple matchers
+  match pattern: "*.psd", pattern: %r{doc[1-2]+} do
+    rm
   end
 end
 
+### This only works on Mac OS X
+os :osx do
+  folder "/Users/myfreeweb/Downloads" do
+    downloaded_from %r{destroyallsoftware} do
+      mv "/Users/myfreeweb/Movies/DAS"
+      open_in :default
+      # or
+      open_in "MPlayerX"
+    end
 
-# You can watch multiple folders at once
+    kind "Ruby Source" do
+      label :red
+    end
+
+    label :green do
+      mv "/Users/myfreeweb/Documents"
+      applescript 'tell app "Finder" to reveal theFile'
+    end
+
+    # This is the multiple matcher syntax
+    match pattern: '*.mp4', downloaded_from: %r{destroyallsoftware} do
+      label :gray
+    end
+  end
+end
+
+### You can watch multiple folders at once
 folders "/Users/myfreeweb/Pictures", "/opt/pictures" do
   # Do things to any files
   any do
-    applescript 'tell app "Finder" to reveal theFile'
     label :blue
   end
 
@@ -75,12 +82,11 @@ end
 ### Matchers
 
 - `any` -- any file
-- `pattern(pat)` -- files that conform to `pat`
+- `pattern(pat)` -- files that conform to `pat` (regexp or glob)
 - `ext(extn)` (or `extension`) -- files that have an extension of `extn`
 - `kind(knd)` -- files that have Spotlight kind of `knd`
 - `label(lbl)` -- files that have Finder label of `lbl`
-- `downloaded_from(url)` -- files that were downloaded from url
-  `url`/url matching `url`
+- `downloaded_from(url)` -- files that were downloaded from url matching `url`
 
 Matchers can be called either by themselves
 
@@ -95,6 +101,13 @@ or grouped into a single statement (preferred)
 
 ```ruby
 match label: :gray, kind: 'Ruby Source' do
+end
+```
+
+in Ruby 1.8:
+
+```ruby
+match :label => :gray, :kind => 'Ruby Source' do
 end
 ```
 
@@ -118,4 +131,4 @@ end
 
 ## License
 
-MIT.
+[MIT](https://github.com/myfreeweb/filesortd/blob/master/LICENSE.txt).
