@@ -43,6 +43,8 @@ os :osx do
   folder "/Users/myfreeweb/Downloads" do
     downloaded_from %r{destroyallsoftware} do
       mv "/Users/myfreeweb/Movies/DAS"
+      open
+      # or
       open_in :default
       # or
       open_in "MPlayerX"
