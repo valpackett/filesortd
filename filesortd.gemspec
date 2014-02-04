@@ -17,8 +17,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "docile"
-  gem.add_dependency "listen"
-  gem.add_dependency "popen4"
-  gem.add_dependency "thor"
+  gem.add_dependency "docile", "~> 1.0"
+  gem.add_dependency "listen", "~> 0.6"
+  gem.add_dependency "popen4", "~> 0.1"
+  gem.add_dependency "thor", "~> 0.16"
+  gem.add_dependency "osx-plist", "~> 1.0" if RUBY_PLATFORM =~ /darwin/
 end

@@ -7,10 +7,6 @@ Like [Hazel](http://www.noodlesoft.com/hazel.php), but cross-platform, no GUI re
 
     $ gem install filesortd
 
-If you're on OS X, also install osx-plist for things like `downloaded_from` (i.e. xattr support) to work:
-
-    $ gem install osx-plist
-
 ## Usage
 
     $ filesortd start yourconfig.rb
