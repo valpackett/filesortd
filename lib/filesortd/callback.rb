@@ -72,7 +72,7 @@ module Filesortd
         SpotlightMatcher.new "kMDItemFSLabel", idx
       when :downloaded_from
         pm = Matcher.new(pattern)
-        m = XattrMatcher.new("com.apple.metadata:kMDItemWhereFroms") do |elements, path|
+        XattrMatcher.new("com.apple.metadata:kMDItemWhereFroms") do |elements, path|
           elements.map { |el| pm.match(el) }.count(true) >= 1
         end
       end
