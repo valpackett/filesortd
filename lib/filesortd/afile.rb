@@ -16,7 +16,7 @@ module Filesortd
       :gray => 7,
       :grey => 7
     }
-      
+
     attr_reader :path
 
     def initialize(path)
@@ -76,13 +76,14 @@ module Filesortd
       out
     end
 
-    def open_in(app)
+    def open_in(app = :default)
       if app == :default
         pass "open"
       else
         pass "open -a #{app.shellescape}"
       end
     end
+    alias :open :open_in
 
     def label(lbl)
       if lbl.is_a? Symbol
